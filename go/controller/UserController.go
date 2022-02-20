@@ -3,7 +3,7 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"go-web-demo/go/common/result"
-	"go-web-demo/go/dao/entity"
+	"go-web-demo/go/dal/entity"
 	"go-web-demo/go/service"
 	"gorm.io/gorm"
 	"strconv"

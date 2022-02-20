@@ -1,7 +1,7 @@
-package database
+package db
 
 import (
-	"go-web-demo/go/database/conf"
+	"go-web-demo/go/db/conf"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
