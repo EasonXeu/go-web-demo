@@ -1,0 +1,7 @@
+url: 127.0.0.1
+userName: root
+password: public
+dbname: example
+post: 3306
+max_idle_conn_count: 10
+max_open_conn_count: 100
