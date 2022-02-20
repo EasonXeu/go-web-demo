@@ -1,7 +1,7 @@
 package mapper
 
 import (
-	"go-web-demo/go/dao/entity"
+	"go-web-demo/go/dal/entity"
 	"gorm.io/gorm"
 )
 

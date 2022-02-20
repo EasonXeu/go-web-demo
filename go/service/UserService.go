@@ -1,8 +1,8 @@
 package service
 
 import (
-	"go-web-demo/go/dao/entity"
-	"go-web-demo/go/dao/mapper"
+	"go-web-demo/go/dal/entity"
+	"go-web-demo/go/dal/mapper"
 )
 
 type UserService struct {
