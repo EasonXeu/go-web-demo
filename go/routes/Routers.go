@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"go-web-demo/go/controller"
-	"go-web-demo/go/dao/mapper"
+	impl2 "go-web-demo/go/dal/mapper"
 	"go-web-demo/go/database"
 	"go-web-demo/go/service"
 )
@@ -15,7 +15,7 @@ func SetRouter() *gin.Engine {
 	r := gin.Default()
 
 	//Init Controller
-	userMapper := mapper.NewUserMapper(database.SqlSession)
+	userMapper := impl2.NewUserMapper(database.SqlSession)
 	userService := service.NewUserService(userMapper)
 	userController := controller.NewUserController(userService)
 

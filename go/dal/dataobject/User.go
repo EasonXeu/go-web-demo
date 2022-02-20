@@ -1,4 +1,4 @@
-package entity
+package dataobject
 
 func (User) TableName() string {
 	return "sys_user"
@@ -14,5 +14,5 @@ type User struct {
 	Mobile    string `gorm:"column:mobile; type:varchar(20);"`
 	CreatedAt int64  `gorm:"column:created_at; type:bigint; not null; autoCreateTime:milli"`
 	UpdatedAt int64  `gorm:"column:updated_at; type:bigint; not null; autoUpdateTime:milli"`
-	DeletedAt int64  `gorm:"column:deleted_at; type:bigint;`
+	DeletedAt int64  `gorm:"column:deleted_at; type:bigint;"`
 }

@@ -1,7 +1,7 @@
 package main
 
 import (
-	"go-web-demo/go/dao/entity"
+	"go-web-demo/go/dal/dataobject"
 	"go-web-demo/go/database"
 	"go-web-demo/go/routes"
 )
@@ -15,7 +15,7 @@ func main() {
 	//程序退出关闭数据库连接
 	defer database.Close()
 	//绑定模型
-	database.SqlSession.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").AutoMigrate(&entity.User{})
+	database.SqlSession.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").AutoMigrate(&dataobject.User{})
 
 	//注册路由
 	engine := routes.SetRouter()
