@@ -1,0 +1,1 @@
+mockery --name=UserMapper --dir=../../dal/mapper --with-expecter

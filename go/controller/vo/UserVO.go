@@ -10,8 +10,8 @@ type UserVO struct {
 	Password  string `json:"password" binding:"required"`
 	Email     string `json:"email" binding:"required,email"`
 	Mobile    string `json:"mobile"`
-	CreatedAt int64  `gorm:"autoCreateTime:milli"`
-	UpdatedAt int64  `gorm:"autoUpdateTime:milli"`
+	CreatedAt int64  `json:"createAt"`
+	UpdatedAt int64  `json:"updateAt"`
 }
 
 func UserVO2DO(vo *UserVO) *dataobject.User {

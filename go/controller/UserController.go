@@ -10,10 +10,10 @@ import (
 )
 
 type UserController struct {
-	userService service.UserService
+	UserService service.UserService
 }
 
-func (userController UserController) CreateUser(c *gin.Context) {
+func (userController *UserController) CreateUser(c *gin.Context) {
 	//定义一个User变量
 	var userVO *vo.UserVO
 	//将调用后端的request请求中的body数据根据json格式解析到User结构变量中
@@ -21,7 +21,7 @@ func (userController UserController) CreateUser(c *gin.Context) {
 	//将被转换的user变量传给service层的CreateUser方法，进行User的新建
 
 	user := vo.UserVO2DO(userVO)
-	err := userController.userService.CreateUser(user)
+	err := userController.UserService.CreateUser(user)
 	//判断是否异常，无异常则返回包含200和更新数据的信息
 	if err != nil {
 		result.Error(c, result.InvalidParam, err.Error())
@@ -31,8 +31,8 @@ func (userController UserController) CreateUser(c *gin.Context) {
 	return
 }
 
-func (userController UserController) ListUsers(c *gin.Context) {
-	userList, err := userController.userService.ListUsers()
+func (userController *UserController) ListUsers(c *gin.Context) {
+	userList, err := userController.UserService.ListUsers()
 	if err != nil {
 		result.Error(c, result.InternalServerError, err.Error())
 		return
@@ -41,7 +41,7 @@ func (userController UserController) ListUsers(c *gin.Context) {
 	return
 }
 
-func (userController UserController) GetUserById(c *gin.Context) {
+func (userController *UserController) GetUserById(c *gin.Context) {
 	id, ok := c.Params.Get("id")
 	if !ok {
 		result.Error(c, result.InvalidParam, "Id is invalid.")
@@ -52,7 +52,7 @@ func (userController UserController) GetUserById(c *gin.Context) {
 		result.Error(c, result.InvalidParam, "Id is invalid.")
 		return
 	}
-	user, err := userController.userService.GetUserById(uint(idInInt))
+	user, err := userController.UserService.GetUserById(uint(idInInt))
 	if err == gorm.ErrRecordNotFound {
 		result.Error(c, result.EntityNotExist, err.Error())
 		return
@@ -64,7 +64,7 @@ func (userController UserController) GetUserById(c *gin.Context) {
 	result.Success(c, vo.UserDO2VO(user))
 	return
 }
-func (userController UserController) UpdateUser(c *gin.Context) {
+func (userController *UserController) UpdateUser(c *gin.Context) {
 	id, ok := c.Params.Get("id")
 	if !ok {
 		result.Error(c, result.InvalidParam, "Id is invalid.")
@@ -75,7 +75,7 @@ func (userController UserController) UpdateUser(c *gin.Context) {
 		result.Error(c, result.InvalidParam, "Id is invalid.")
 		return
 	}
-	user, err := userController.userService.GetUserById(uint(idInInt))
+	user, err := userController.UserService.GetUserById(uint(idInInt))
 	if err == gorm.ErrRecordNotFound {
 		result.Error(c, result.EntityNotExist, err.Error())
 		return
@@ -85,14 +85,14 @@ func (userController UserController) UpdateUser(c *gin.Context) {
 		return
 	}
 	c.BindJSON(&user)
-	if err = userController.userService.UpdateUser(user); err != nil {
+	if err = userController.UserService.UpdateUser(user); err != nil {
 		result.Error(c, result.InternalServerError, err.Error())
 		return
 	}
 	result.Success(c, vo.UserDO2VO(user))
 }
 
-func (userController UserController) DeleteUserById(c *gin.Context) {
+func (userController *UserController) DeleteUserById(c *gin.Context) {
 	id, ok := c.Params.Get("id")
 	if !ok {
 		result.Error(c, result.InvalidParam, "Id is invalid.")
@@ -103,13 +103,9 @@ func (userController UserController) DeleteUserById(c *gin.Context) {
 		result.Error(c, result.InvalidParam, "Id is invalid.")
 		return
 	}
-	if err := userController.userService.DeleteUserById(uint(idInInt)); err != nil {
+	if err := userController.UserService.DeleteUserById(uint(idInInt)); err != nil {
 		result.Error(c, result.InternalServerError, err.Error())
 		return
 	}
 	result.SuccessWithoutData(c)
-}
-
-func NewUserController(userService service.UserService) UserController {
-	return UserController{userService: userService}
 }

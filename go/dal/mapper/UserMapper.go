@@ -1,9 +1,6 @@
 package mapper
 
-import (
-	"go-web-demo/go/dal/dataobject"
-	"gorm.io/gorm"
-)
+import "go-web-demo/go/dal/dataobject"
 
 type UserMapper interface {
 	CreateUserDO(user *dataobject.User) (err error)
@@ -15,8 +12,4 @@ type UserMapper interface {
 	GetUserDOById(id uint) (user *dataobject.User, err error)
 
 	UpdateUserDO(user *dataobject.User) (err error)
-}
-
-func NewUserMapper(sqlSession *gorm.DB) UserMapper {
-	return UserMapperImpl{sqlSession: sqlSession}
 }

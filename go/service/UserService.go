@@ -2,7 +2,6 @@ package service
 
 import (
 	"go-web-demo/go/dal/dataobject"
-	"go-web-demo/go/dal/mapper"
 )
 
 type UserService interface {
@@ -15,8 +14,4 @@ type UserService interface {
 	GetUserById(id uint) (user *dataobject.User, err error)
 
 	UpdateUser(user *dataobject.User) (err error)
-}
-
-func NewUserService(userMapper mapper.UserMapper) UserService {
-	return UserServiceImpl{userMapper: userMapper}
 }

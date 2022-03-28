@@ -4,9 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"go-web-demo/go/controller"
-	"go-web-demo/go/dal/mapper"
-	"go-web-demo/go/db"
-	"go-web-demo/go/service"
+	"go-web-demo/go/wire"
 )
 
 var userController *controller.UserController
@@ -14,15 +12,11 @@ var userController *controller.UserController
 func SetRouter() *gin.Engine {
 	r := gin.Default()
 
-	//Init Controller
-	userMapper := mapper.NewUserMapper(db.SqlSession)
-	userService := service.NewUserService(userMapper)
-	userController := controller.NewUserController(userService)
-
+	userController := wire.InitUserController()
 	/**
 	用户User路由组
 	*/
-	userGroup := r.Group("user")
+	userGroup := r.Group("/v1")
 	userGroup.Use(MyMiddleware())
 
 	{
