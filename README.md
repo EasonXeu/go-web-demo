@@ -2,3 +2,4 @@
 + This sample uses the classical MVC pattern 
 + This sample uses interface-based programming pattern
 + This sample uses wire tool to perform Dependency Injection
++ This sample uses Testify and Mockery to perform test cases
